@@ -1,0 +1,70 @@
+Q1.  Given a square mat[][]. The task is to rotate it by 90 degrees in clockwise direction without using any extra space.
+
+Examples:
+
+Input: mat[][] = [[1 2 3], [4 5 6], [7 8 9]]
+Output:
+7 4 1 
+8 5 2
+9 6 3
+Input: mat[][] = [1 2], [3 4]
+Output:
+3 1 
+4 2
+Input: mat[][] = [[1]]
+Output:
+1
+Constraints:
+1 ≤ mat.size() ≤ 1000
+1 <= mat[][] <= 100
+
+ANSWER IN JAVA 
+
+class RotateMatrix {
+    // Function to rotate the matrix by 90 degrees clockwise
+    static void rotateMatrix(int mat[][]) {
+        int n = mat.length;
+        
+        // Step 1: Transpose the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                // Swap mat[i][j] with mat[j][i]
+                int temp = mat[i][j];
+                mat[i][j] = mat[j][i];
+                mat[j][i] = temp;
+            }
+        }
+        
+        // Step 2: Reverse each row
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n / 2; j++) {
+                // Swap mat[i][j] with mat[i][n-j-1]
+                int temp = mat[i][j];
+                mat[i][j] = mat[i][n - j - 1];
+                mat[i][n - j - 1] = temp;
+            }
+        }
+    }
+
+    // Function to print the matrix
+    static void printMatrix(int mat[][]) {
+        int n = mat.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(mat[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        int mat[][] = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        
+        rotateMatrix(mat);
+        printMatrix(mat);
+    }
+}
